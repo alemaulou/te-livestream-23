@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPi livestream</title>
+    <style>
+
+        body {
+            margin: 0;
+            text-align:center;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(219, 163, 163);
+            color:firebrick;
+            }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 55%
+            }
+    </style>
+</head>
+<body>
+    <h1>Livestream</h1>
+    <img src="{{ url_for('stream') }}">
+    
+</body>
+
+</html>
+

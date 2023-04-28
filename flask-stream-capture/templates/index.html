@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPI slider cam capture</title>
+    <style>
+
+        body {
+            margin: 0;
+            text-align:center;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(219, 163, 163);
+            color:firebrick;
+            }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 75%
+            }
+    </style>
+</head>
+<body>
+    <h1>Raspberry Pi Flask Livestream</h1>
+    <h2>Slider and Capture example</h2>
+    <img src="{{ url_for('stream') }}">
+
+    <hr>
+    <form  method="POST">
+        <p><input id="cam-slider" type="range" min="500" max="2000" value="1000" name="slider"></p>
+
+    </form>
+    <form method="POST">
+        <p><input id="capture-btn" type="button" name="capture-btn" value="Take Pic"></p>
+
+    </form>
+
+    <script>
+        let req = new XMLHttpRequest;
+        let slider = document.querySelector("#cam-slider");
+        let slider_value;
+        let button = document.querySelector("#capture-btn")
+
+        slider.oninput= function(){
+            //let req = new XMLHttpRequest;
+            slider_value = parseInt(this.value);
+            req.open('POST', '/slider')
+            req.send(slider_value)
+        }
+
+       button.onclick = function(){
+
+            req.open('POST', '/capture')
+            req.send("Take pic!")
+       
+        }
+
+    
+    </script>
+    
+</body>
+
+</html>
+
