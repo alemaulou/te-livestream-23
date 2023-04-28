@@ -4,9 +4,10 @@ from rpi_camera import RPiCamera
 
 app = Flask(__name__)
 
-SERVO_PIN = 17
+SERVO_PIN = 2
 pi = pigpio.pi() # create an instance of the pigpio library
 angle = 500 # initialize the angle variable'
+sweep = 1
 
 # note: angle is initialized to 500. This is because angle is being 
 # used to set the initial position of the servo motor connected to SERVO_PIN. 

@@ -4,7 +4,7 @@ from rpi_camera import RPiCamera
 
 app = Flask(__name__)
 
-SERVO_PIN = 17 # define the GPIO pin number to which the servo motor is connected
+SERVO_PIN = 2 # define the GPIO pin number to which the servo motor is connected
 pi = pigpio.pi() # create an instance of the pigpio library
 angle = 500 # initialize the angle variable'
 
@@ -25,6 +25,7 @@ def index():
 # define a generator function named 'gen' that yields frames from the RPiCamera
 def gen(camera):
     while True:
+        global angle
         frame = camera.get_frame()
         # set the servo pulsewidth to the angle value
         pi.set_servo_pulsewidth(SERVO_PIN, angle)
@@ -43,6 +44,7 @@ def slider():
     data = request.data
     # decode the data from bytes to string
     data = data.decode("utf-8")
+    print(int(data))
     # set the servo pulsewidth to the value of the slider 
     pi.set_servo_pulsewidth(SERVO_PIN, int(data))
     # return the data received from the slider

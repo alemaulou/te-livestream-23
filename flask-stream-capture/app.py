@@ -8,12 +8,13 @@ from rpi_camera import RPiCamera
 app = Flask(__name__)
 
 # Set servo pin as a constant variable (may change depending on your pin)
-SERVO_PIN = 17
+SERVO_PIN = 2
 
 # Importing pigpio library for smoother servo performance
 # Before running, make sure to start with $ sudo pigpiod,
 # or read this doc: https://gpiozero.readthedocs.io/en/stable/remote_gpio.html
 pi = pigpio.pi() 
+print(pi.connected)
 
 # Initialize the current frame
 current_frame = 0
@@ -63,10 +64,15 @@ def capture():
     jpeg = cv2.imdecode(current_frame, cv2.IMREAD_COLOR)
 
     # Set the full path to store the captured image
-    full_path = os.path.join(app.root_path, 'captured_pics', file_name)
+    # create folder captured_pics/ if does not exist
+    full_path = os.path.join(app.root_path, 'captured_pics/', file_name)
+    print(full_path)
     
     # Save the image to the full path
-    cv2.imwrite(full_path , jpeg)
+    isWritten = cv2.imwrite(full_path , jpeg)
+
+    if not isWritten:
+        print('Image not saved')
     
     # Return the full path (which does nothing yet, but could be used to display the captured image)
     return full_path
