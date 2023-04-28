@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RPI slider cam capture</title>
     <style>
-
+        /* CSS styles for the webpage */
         body {
             margin: 0;
             text-align:center;
@@ -27,39 +27,52 @@
     <img src="{{ url_for('stream') }}">
 
     <hr>
+    <!-- Slider form -->
     <form  method="POST">
         <p><input id="cam-slider" type="range" min="500" max="2000" value="1000" name="slider"></p>
-
     </form>
+    <!-- Capture button form -->
     <form method="POST">
         <p><input id="capture-btn" type="button" name="capture-btn" value="Take Pic"></p>
-
     </form>
 
     <script>
+        // Create a new instance of XMLHttpRequest object
         let req = new XMLHttpRequest;
+    
+        // Select the slider element in the HTML document
         let slider = document.querySelector("#cam-slider");
+    
+        // Initialize slider value
         let slider_value;
+    
+        // Select the capture button element in the HTML document
         let button = document.querySelector("#capture-btn")
-
+    
+        // Define what happens when slider value changes
         slider.oninput= function(){
-            //let req = new XMLHttpRequest;
+    
+            // Update the value of the slider variable
             slider_value = parseInt(this.value);
+    
+            // Open a new POST request to the '/slider' route
             req.open('POST', '/slider')
+    
+            // Send the slider_value variable to the server
             req.send(slider_value)
         }
-
+    
+       // Define what happens when the capture button is clicked
        button.onclick = function(){
-
+    
+            // Open a new POST request to the '/capture' route
             req.open('POST', '/capture')
+    
+            // Send a string to the server to indicate that the capture button was clicked
             req.send("Take pic!")
        
         }
-
-    
     </script>
     
 </body>
-
 </html>
-

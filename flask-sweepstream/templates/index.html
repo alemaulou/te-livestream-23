@@ -6,26 +6,30 @@
     <title>RPi livestream</title>
     <style>
 
+        /* CSS styling for the body */
         body {
             margin: 0;
             text-align:center;
             font-family: Arial, Helvetica, sans-serif;
             background-color: rgb(219, 163, 163);
             color:firebrick;
-            }
+        }
+        
+        /* CSS styling for the image */
         img {
             display: block;
             margin-left: auto;
             margin-right: auto;
             width: 55%
-            }
+        }
     </style>
 </head>
 <body>
+    <!-- Heading of the HTML page -->
     <h1>Livestream</h1>
+    <!-- Displaying the livestream -->
     <img src="{{ url_for('stream') }}">
     
 </body>
 
 </html>
-
